@@ -1,0 +1,19 @@
++*In[2]:*+
+[source, ipython3]
+----
+from pymatgen.ext.matproj import MPRester
+from pymatgen.io.cif import CifWriter
+with MPRester("pP3oO84VRXsSUgkW") as m:
+
+    # Structure for material id
+    structure = m.get_structure_by_material_id("mp-22893")
+    w = CifWriter(structure)
+    w.write_file("mp-22893.cif")
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
