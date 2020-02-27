@@ -1,0 +1,103 @@
++*In[21]:*+
+[source, ipython3]
+----
+from pymatgen.io.cif import CifParser
+parser = CifParser("mp-22893.cif")
+structure = parser.get_structures()[0]
+from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
+new_s=SpacegroupAnalyzer(structure).get_primitive_standard_structure()
+system = SpacegroupAnalyzer(new_s).get_crystal_system()
+print(system)
+from pymatgen.core.lattice import Lattice
+new_s = Lattice(structure)
+a = Lattice(new_s).a
+print(a)
+b = Lattice(new_s).b
+print(b)
+c = Lattice(new_s).c
+print(c)
+from pymatgen.symmetry.groups import PointGroup
+new_s = PointGroup(structure)
+groupe_ponctuel = PointGroup(new_s)
+print(groupe_ponctuel)
+
+----
+
+
++*Out[21]:*+
+----
+trigonal
+
+
+    ---------------------------------------------------------------------------
+
+    ValueError                                Traceback (most recent call last)
+
+    <ipython-input-21-7877c99c1717> in <module>
+          8 from pymatgen.core.lattice import Lattice
+          9 #new_s = Lattice(structure)
+    ---> 10 a = Lattice(new_s).a
+         11 #print(a)
+         12 #b = Lattice(new_s).b
+
+
+    /usr/local/lib64/python3.6/site-packages/pymatgen/core/lattice.py in __init__(self, matrix)
+         60                 with lattice vectors [10, 0, 0], [20, 10, 0] and [0, 0, 30].
+         61         """
+    ---> 62         m = np.array(matrix, dtype=np.float64).reshape((3, 3))
+         63         m.setflags(write=False)
+         64         self._matrix = m  # type: np.ndarray
+
+
+    ValueError: setting an array element with a sequence.
+
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
