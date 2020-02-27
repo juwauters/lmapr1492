@@ -1,4 +1,4 @@
-+*In[30]:*+
++*In[43]:*+
 [source, ipython3]
 ----
 from pymatgen.io.cif import CifParser
@@ -8,6 +8,7 @@ from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 new_s=SpacegroupAnalyzer(structure).get_primitive_standard_structure()
 system = SpacegroupAnalyzer(new_s).get_crystal_system()
 print(system)
+print("")
 from pymatgen.symmetry.analyzer import PointGroupAnalyzer
 #new_s = PointGroupAnalyzer(structure).get_primitive_standard_structure()
 #system2 = PointGroupAnalyzer(new_s).get_pointgroup()
@@ -15,7 +16,10 @@ from pymatgen.symmetry.analyzer import PointGroupAnalyzer
 from pymatgen.core.lattice import Lattice
 vect = structure.lattice
 print(vect)
-#vect_diret = vecteurdirect.reciprocal_lattice
+print("")
+reciproque = vect.reciprocal_lattice
+print(reciproque)
+print("")
 #reciproque = Lattice(new_s).reciprocal_lattice_crystallographic
 #print(reciproque)
 #a = Lattice(new_s).a
@@ -28,31 +32,34 @@ print(vect)
 #new_s = PointGroup(structure)
 #groupe_ponctuel = PointGroup(new_s)
 #print(groupe_ponctuel)
+#from pymatgen.symmetry.analyzer import PointGroupAnalyzer
+#groupe_ponctuel = PointGroupAnalyzer.get_pointgroup()
+#print(groupe_ponctuel)
 
+group_ponct = SpacegroupAnalyzer(structure).get_point_group_symbol()
+print(group_ponct)
+print("")
+type_maille = SpacegroupAnalyzer(structure).get_lattice_type()
+print(type_maille)
+print("")
 ----
 
 
-+*Out[30]:*+
++*Out[43]:*+
 ----
 trigonal
+
 -2.344710 -4.061157 -0.000000
 -2.344710 4.061157 0.000000
 0.000000 0.000000 -7.503160
 
+-1.339864 -0.773571 -0.000000
+-1.339864 0.773571 -0.000000
+0.000000 0.000000 -0.837405
 
-    ---------------------------------------------------------------------------
+-3m
 
-    NameError                                 Traceback (most recent call last)
-
-    <ipython-input-30-bb7fc518c2ef> in <module>
-         13 vect = structure.lattice
-         14 print(vect)
-    ---> 15 vect_diret = vecteurdirect.reciprocal_lattice
-         16 #reciproque = Lattice(new_s).reciprocal_lattice_crystallographic
-         17 #print(reciproque)
-
-
-    NameError: name 'vecteurdirect' is not defined
+hexagonal
 
 ----
 
