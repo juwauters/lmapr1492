@@ -1,0 +1,77 @@
++*In[20]:*+
+[source, ipython3]
+----
+#from pymatgen.ext.matproj import MPRester
+#from pymatgen.entries.compatibility import MaterialsProjectCompatibility
+#from pymatgen.io.cif import CifWriter
+
+#with MPRester("pP3oO84VRXsSUgkW") as m:
+#    struct = m.get_structure_by_material_id("mp-22893")
+#    w = CifWriter(struct,0.1)
+#    w.write_file("mp-22893.cif")
+from pymatgen.io.cif import CifParser
+parser = CifParser("mp-22893.cif")
+structure = parser.get_structures()[0]
+    
+from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
+new_s = SpacegroupAnalyzer(struct).get_primitive_standard_structure()
+sym = SpacegroupAnalyzer(new_s,0.1).get_symmetry_operations(cartesian=False)
+
+import numpy as np
+
+S = np.asarray(sym)
+
+#print(S)
+
+print("2: Ci : 0 0 0 (-x, -y, -z)")
+print("initial : [1, 1, 1]")
+print("final :")
+sym1 = S[1]
+a = sym1.as_xyz_string()
+coord_sym1 = sym1.operate([1,1,1])
+print(coord_sym1)
+print("")
+
+print("4: 3-bar axis (y, -x+y, -z)")
+print("initial : [0.66, 0.33, 0.75]")
+print("final :")
+sym2 = S[3]
+b = sym2.as_xyz_string()
+coord_sym2 = sym2.operate([0.66,0.33,0.75])
+print(coord_sym2)
+print("")
+
+print("10: mirror plane (-x+y, y, z)")
+print("initial : [1, 0, 0]")
+print("final :")
+sym3 = S[9]
+c = sym3.as_xyz_string()
+coord_sym3 = sym3.operate([1,0,0])
+print(coord_sym3)
+----
+
+
++*Out[20]:*+
+----
+2: Ci : 0 0 0 (-x, -y, -z)
+initial : [1, 1, 1]
+final :
+[-1. -1. -1.]
+
+4: 3-bar axis (y, -x+y, -z)
+initial : [0.66, 0.33, 0.75]
+final :
+[ 0.33 -0.33 -0.75]
+
+10: mirror plane (-x+y, y, z)
+initial : [1, 0, 0]
+final :
+[-1.  0.  0.]
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
