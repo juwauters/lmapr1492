@@ -1,0 +1,60 @@
++*In[10]:*+
+[source, ipython3]
+----
+from pymatgen.io.cif import CifParser
+parser = CifParser("mp-22893.cif")
+struct = parser.get_structures()[0]
+    
+from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
+new_s = SpacegroupAnalyzer(struct).get_primitive_standard_structure()
+
+from pymatgen.analysis.diffraction.xrd import XRDCalculator
+
+diffr = XRDCalculator('CuKa').get_pattern(new_s)
+print(diffr)
+plot = XRDCalculator('CuKa').get_plot(new_s)
+# 2 theta : donné par le premier tableau de nombres
+# intensité : donnée par le deuxième tableau de nombres
+# hkl : donné sur la figure au dessus des pics correspondants, sous la forme [hkil].
+# il ne faut donc pas prendre le 3e chiffre, qui ets égal à -(h+k)
+----
+
+
++*Out[10]:*+
+----
+DiffractionPattern
+$2\Theta$: [11.79464391 21.88545715 23.71661374 24.93082088 32.49088629 35.9061682
+ 38.39084587 40.29903802 42.4463678  44.62467556 45.62602876 46.3215782
+ 48.53334818 51.15103624 53.57491695 53.83483679 58.55350603 60.29620035
+ 61.67952825 61.82523737 63.51415498 65.72841719 66.41598109 68.043188
+ 69.42837316 70.71516572 72.21206639 74.51868736 75.16980653 76.1185331
+ 79.40380284 80.33745743 80.71435464 80.92656211 82.23150625 83.45074817
+ 86.38213825 87.09289675 87.59354883 88.64157737 89.22292618]
+Intensity: [4.37010567e+01 4.41279879e+00 5.42569033e-01 1.00000000e+02
+ 6.29613052e+01 2.69690138e+00 3.81777251e+01 1.42941926e+01
+ 2.55248697e+01 8.18857719e-01 3.86118982e-01 1.90403873e+01
+ 6.49345368e+00 1.77303782e+01 5.28592521e+00 1.02461240e+00
+ 9.90218394e+00 7.14337272e-01 1.62554500e+01 8.19247992e-01
+ 1.74578257e+01 1.68506277e+01 6.22931159e+00 5.34805030e-01
+ 6.75729972e+00 2.83701871e+00 1.07480442e+01 6.77068470e-02
+ 2.84247468e+00 9.70288466e-03 3.84206331e+00 4.92016957e+00
+ 1.69651535e+00 7.01266718e-01 4.36294106e+00 1.88634171e+00
+ 2.97517775e-01 4.19096736e-02 6.53361985e+00 3.67766047e-02
+ 7.40086425e+00]
+
+![png](output_0_1.png)
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----

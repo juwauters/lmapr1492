@@ -1,4 +1,4 @@
-+*In[20]:*+
++*In[2]:*+
 [source, ipython3]
 ----
 #from pymatgen.ext.matproj import MPRester
@@ -11,7 +11,7 @@
 #    w.write_file("mp-22893.cif")
 from pymatgen.io.cif import CifParser
 parser = CifParser("mp-22893.cif")
-structure = parser.get_structures()[0]
+struct = parser.get_structures()[0]
     
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 new_s = SpacegroupAnalyzer(struct).get_primitive_standard_structure()
@@ -51,7 +51,7 @@ print(coord_sym3)
 ----
 
 
-+*Out[20]:*+
++*Out[2]:*+
 ----
 2: Ci : 0 0 0 (-x, -y, -z)
 initial : [1, 1, 1]
