@@ -1,0 +1,45 @@
++*In[2]:*+
+[source, ipython3]
+----
+#from pymatgen.io.cif import CifParser
+#parser = CifParser("mp-22893.cif")
+#struct = parser.get_structures()[0]
+from pymatgen.ext.matproj import MPRester
+with MPRester("pP3oO84VRXsSUgkW") as m:
+    band_struct = m.get_bandstructure_by_material_id("mp-22893")
+band_gap = band_struct.get_band_gap()
+print(band_gap)
+dir_band_gap = band_struct.get_direct_band_gap()
+print(dir_band_gap)
+from pymatgen.electronic_structure.bandstructure import BandStructure
+max = BandStructure.get_cbm(band_struct)
+min = BandStructure.get_vbm(band_struct)
+print("max = ", max['energy'])
+print("min = ", min['energy'])
+from pymatgen.electronic_structure.plotter import BSPlotter
+#from pymatgen.electronic_structure.plotter import BSPlotterProjected
+from pymatgen.electronic_structure.plotter import BoltztrapPlotter
+import matplotlib.pyplot as plotter
+BSPlotter(band_struct).get_plot(True, None, False, True, None)
+#BSPlotterProjected(band_struct).get_elt_projected_plots()
+
+#BoltztrapPlotter.plot_eff_mass_temp()
+----
+
+
++*Out[2]:*+
+----
+{'direct': False, 'energy': 2.3702, 'transition': 'H-A'}
+2.4325
+max =  3.7054
+min =  1.3352
+<module 'matplotlib.pyplot' from '/usr/local/lib64/python3.6/site-packages/matplotlib/pyplot.py'>
+![png](output_0_2.png)
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
